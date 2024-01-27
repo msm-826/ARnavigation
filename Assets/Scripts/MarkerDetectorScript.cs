@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class MarkerDetectorScript : MonoBehaviour {
     [SerializeField]
@@ -14,7 +15,11 @@ public class MarkerDetectorScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         foreach (var trackedImage in imageManager.trackables) {
-            locationName.text = trackedImage.referenceImage.name;
+            if (trackedImage.trackingState == TrackingState.Tracking) {
+                locationName.text = trackedImage.referenceImage.name;
+            } else {
+                locationName.text = string.Empty;
+            }
         }
     }
 }
