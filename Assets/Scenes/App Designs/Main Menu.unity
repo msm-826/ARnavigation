@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 21608603}
   - component: {fileID: 21608602}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BackgroundPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 1231764331}
   - component: {fileID: 1231764330}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1473,6 +1473,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5533962941859861703, guid: d8a035b35e22058458834915883ffba8, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 1231764329}
+    - target: {fileID: 5533962941859861703, guid: d8a035b35e22058458834915883ffba8, type: 3}
+      propertyPath: loadingScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533962941859861703, guid: d8a035b35e22058458834915883ffba8, type: 3}
+      propertyPath: mainMenuScene
+      value: 
+      objectReference: {fileID: 1231764329}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
