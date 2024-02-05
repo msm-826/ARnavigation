@@ -15,6 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/App Designs/QRCodeScanScene.unity
     guid: ff87b5a9e709ff34fba08f15c0415ea3
   m_configObjects:
-    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 68e07514c3f77784aa6215e75f4df314, type: 2}
-    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: c62e383e099e1d24481f9f68312b2915, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6228ad29538a54746bd81db616a7d6cd, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: e2f7f198224d02a49b26a92bd1c166a3, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: edcbf88c7108089418addfe47f2ebff1, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d2ee4a34d4ee92941b167002fa9869ef, type: 2}
+  m_UseUCBPForAssetBundles: 0

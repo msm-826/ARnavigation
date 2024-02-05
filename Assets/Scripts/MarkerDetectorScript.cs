@@ -39,6 +39,7 @@ public class MarkerDetectorScript : MonoBehaviour {
 
     public void OnARSessionExit (int SceneIndex) {
         SceneManager.LoadScene(SceneIndex, LoadSceneMode.Single);
+        arSession.Reset();
     }
 
     public void onRetryClick () { 
