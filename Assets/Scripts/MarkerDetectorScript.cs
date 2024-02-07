@@ -33,6 +33,7 @@ public class MarkerDetectorScript : MonoBehaviour {
 
         foreach (var newImage in eventArgs.added) {
             locationName.text = newImage.referenceImage.name;
+            Handheld.Vibrate();
             isDetecting = false;
         }
     }

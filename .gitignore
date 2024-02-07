@@ -71,4 +71,19 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+
+# Added
 .utmp
+
+Editor*Default*Resources/
+Editor*Default*Resources.meta
+ExternalDependencyManager/
+ExternalDependencyManager.meta
+Firebase/
+Firebase.meta
+StreamingAssets
+StreamingAssets.meta
+Plugins/
+Plugins.meta
+google-services.json
+google-services.json.meta

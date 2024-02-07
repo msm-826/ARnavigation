@@ -6,16 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/App Designs/Main Menu.unity
+    path: Assets/Scenes/App Designs/LoadingScene.unity
+    guid: d064787a15aa0394e82b86ecaef5e936
+  - enabled: 1
+    path: Assets/Scenes/App Designs/SignInScene.unity
+    guid: 7504065f2bd39ae45a9089aea94d2711
+  - enabled: 1
+    path: Assets/Scenes/App Designs/SignUpScene.unity
+    guid: 2dd277419d7dc634599792fdd82b7706
+  - enabled: 1
+    path: Assets/Scenes/App Designs/MainMenuScene.unity
     guid: d3abc866da330bd4fb182bd6124f0d9d
   - enabled: 1
-    path: Assets/Scenes/App Designs/How To.unity
+    path: Assets/Scenes/App Designs/HowToScene.unity
     guid: 877b4a761cdcd534699283d46cc00f14
   - enabled: 1
-    path: Assets/Scenes/App Designs/QRCodeScanScene.unity
+    path: Assets/Scenes/App Designs/MarkerDetectionScene.unity
     guid: ff87b5a9e709ff34fba08f15c0415ea3
   m_configObjects:
-    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: e2f7f198224d02a49b26a92bd1c166a3, type: 2}
-    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: edcbf88c7108089418addfe47f2ebff1, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d2ee4a34d4ee92941b167002fa9869ef, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 688ce30a856b1bf4684d3a25ac3f8897, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 6c0e422b2a62f9341b4ec34d8e81a73d, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 55f97d7c3dcc5064cb52fc91633bb77c, type: 2}
   m_UseUCBPForAssetBundles: 0
