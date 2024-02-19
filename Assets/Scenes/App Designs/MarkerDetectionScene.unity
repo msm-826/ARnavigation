@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 94885714}
   - component: {fileID: 94885715}
   m_Layer: 0
-  m_Name: MarkerDetector
+  m_Name: MarkerDetectorSceneHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   trackedImageManager: {fileID: 309949388}
   locationName: {fileID: 1528310555}
   retryButton: {fileID: 602489495}
+  backButton: {fileID: 1253217426}
   arSession: {fileID: 1307447414}
 --- !u!1 &309949387
 GameObject:
@@ -519,8 +520,9 @@ GameObject:
   - component: {fileID: 1203915570}
   - component: {fileID: 1203915569}
   - component: {fileID: 1203915568}
+  - component: {fileID: 1203915571}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MarkerDetectorSceneCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,6 +613,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1203915571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203915566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605417a62622c3347aca71ad2485e905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedImageManager: {fileID: 0}
+  locationName: {fileID: 0}
+  retryButton: {fileID: 0}
+  backButton: {fileID: 0}
+  arSession: {fileID: 0}
 --- !u!1 &1253217424
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,19 +713,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1253217427}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 94885715}
-        m_TargetAssemblyTypeName: MarkerDetectorScript, Assembly-CSharp
-        m_MethodName: OnARSessionExit
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1253217427
 MonoBehaviour:
   m_ObjectHideFlags: 0

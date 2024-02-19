@@ -17,9 +17,7 @@ public class SignUpHandller : MonoBehaviour {
     [SerializeField] private TMP_Text alertLabel;
 
     protected FirebaseAuth auth;
-    protected string displayName = "";
 
-    // Start is called before the first frame update
     void Start() {
         auth = FirebaseAuth.DefaultInstance;
         signUpButton.onClick.AddListener(() => SignUp());
@@ -36,7 +34,6 @@ public class SignUpHandller : MonoBehaviour {
         }
     }
 
-    // Create a user with the email and password.
     public Task CreateUserWithEmailAsync() {
         string email = emailField.text;
         string password = passwordField.text;
@@ -44,20 +41,19 @@ public class SignUpHandller : MonoBehaviour {
         Debug.Log($"Attempting to create user: {email}...");
         DisableUIElements();
 
-        // This passes the current displayName through to HandleCreateUserAsync
-        // so that it can be passed to UpdateUserProfile().  displayName will be
-        // reset by AuthStateChanged() when the new user is created and signed in.
         return auth.CreateUserWithEmailAndPasswordAsync(email, password)
             .ContinueWithOnMainThread((task) => {
+                // doesnt run because scene changes as soon as auth state changes
+                // so script is destroyed.
                 EnableUIElements();
-                LogTaskCompletion(task, "User Creation");
+                if (LogTaskCompletion(task, "User Creation")) { 
+                    Debug.Log("Account created");
+                }              
                 return task;
             }).Unwrap();
     }
 
-    // Log the result of the specified task, returning true if the task
-    // completed successfully, false otherwise.
-    protected bool LogTaskCompletion (Task task, string operation) {
+   protected bool LogTaskCompletion (Task task, string operation) {
         bool complete = false;
         if (task.IsCanceled) {
             Debug.Log($"{operation} canceled.");
@@ -111,20 +107,6 @@ public class SignUpHandller : MonoBehaviour {
                 break;
         }
     }
-
-    /*// Update the user's display name with the currently selected display name.
-    public Task UpdateUserProfileAsync (string newDisplayName = null) {
-        if (auth.CurrentUser == null) {
-            Debug.Log("Not signed in, unable to update user profile");
-            return Task.FromResult(0);
-        }
-        displayName = newDisplayName ?? displayName;
-        Debug.Log($"Updating user profile: {displayName} ");
-        return auth.CurrentUser.UpdateUserProfileAsync(new UserProfile {
-            DisplayName = displayName,
-            PhotoUrl = auth.CurrentUser.PhotoUrl,
-        });
-    }*/
 
     private void DisableUIElements() {
         emailField.DeactivateInputField();

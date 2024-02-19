@@ -30,13 +30,12 @@ public class SignInHandler :MonoBehaviour {
         Debug.Log($"Attempting to sign in as: {email}...");
         DisableUIElements();
 
-        return auth.SignInWithEmailAndPasswordAsync(email, password)
-              .ContinueWithOnMainThread(task => {
-                  EnableUIElements();
-                  if (LogTaskCompletion(task, "Sign-in")) {
-                      Debug.Log($"{task.Result.User.DisplayName} signed in");
-                  }
-              });
+        return auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
+            EnableUIElements();
+            if (LogTaskCompletion(task, "Sign-in")) {
+                Debug.Log($"{task.Result.User.DisplayName} signed in");
+            }
+        });
     }
 
     protected bool LogTaskCompletion (Task task, string operation) {

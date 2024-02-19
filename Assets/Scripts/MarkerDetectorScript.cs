@@ -5,20 +5,26 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class MarkerDetectorScript : MonoBehaviour {
-    [SerializeField]
-    private ARTrackedImageManager trackedImageManager;
-
-    [SerializeField]
-    TextMeshProUGUI locationName;
-
-    [SerializeField]
-    Button retryButton;
-
-    [SerializeField]
-    private ARSession arSession;
+    [SerializeField] private ARTrackedImageManager trackedImageManager;
+    [SerializeField] TMP_Text locationName;
+    [SerializeField] Button retryButton;
+    [SerializeField] Button backButton;
+    [SerializeField] private ARSession arSession;
 
 
     private bool isDetecting = true;
+
+    public void Start () {
+        backButton.onClick.AddListener(() => {
+            SceneManager.LoadScene("MainMenuScene");
+            arSession.Reset();
+        });
+        retryButton.onClick.AddListener(() => {
+            arSession.Reset();
+            locationName.text = string.Empty;
+            isDetecting = true;
+        });
+    }
 
     private void OnEnable() {
         trackedImageManager.trackedImagesChanged += OnChanged;
@@ -36,16 +42,5 @@ public class MarkerDetectorScript : MonoBehaviour {
             Handheld.Vibrate();
             isDetecting = false;
         }
-    }
-
-    public void OnARSessionExit (int SceneIndex) {
-        SceneManager.LoadScene(SceneIndex, LoadSceneMode.Single);
-        arSession.Reset();
-    }
-
-    public void onRetryClick () { 
-        arSession.Reset();
-        locationName.text = string.Empty;
-        isDetecting = true;
     }
 }
