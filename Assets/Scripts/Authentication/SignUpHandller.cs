@@ -1,3 +1,4 @@
+using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
 using System;
@@ -34,45 +35,36 @@ public class SignUpHandller : MonoBehaviour {
         }
     }
 
-    public Task CreateUserWithEmailAsync() {
+    public void CreateUserWithEmailAsync () {
         string email = emailField.text;
         string password = passwordField.text;
 
         Debug.Log($"Attempting to create user: {email}...");
         DisableUIElements();
 
-        return auth.CreateUserWithEmailAndPasswordAsync(email, password)
-            .ContinueWithOnMainThread((task) => {
-                // doesnt run because scene changes as soon as auth state changes
-                // so script is destroyed.
-                EnableUIElements();
-                if (LogTaskCompletion(task, "User Creation")) { 
-                    Debug.Log("Account created");
-                }              
-                return task;
-            }).Unwrap();
-    }
+        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => { 
+            EnableUIElements();
 
-   protected bool LogTaskCompletion (Task task, string operation) {
-        bool complete = false;
-        if (task.IsCanceled) {
-            Debug.Log($"{operation} canceled.");
-        } else if (task.IsFaulted) {
-            Debug.Log($"{operation} encounted an error.");
-            foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
-                string authErrorCode = "";
-                Firebase.FirebaseException firebaseEx = exception as Firebase.FirebaseException;
-                if (firebaseEx != null) {
-                    authErrorCode = $"AuthError: {(AuthError) firebaseEx.ErrorCode}";
-                    GetErrorMessage((AuthError) firebaseEx.ErrorCode);
-                }
-                Debug.Log(authErrorCode + exception.ToString());
+            if (task.IsCanceled) {
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                return;
             }
-        } else if (task.IsCompleted) {
-            Debug.Log(operation + " completed");
-            complete = true;
-        }
-        return complete;
+
+            if (task.IsFaulted) {
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
+                foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null) {
+                        Debug.LogError($"AuthError: {((AuthError) firebaseEx.ErrorCode)}");
+                        GetErrorMessage((AuthError) firebaseEx.ErrorCode);
+                    }
+                }
+                return;
+            }
+
+            AuthResult result = task.Result;
+            Debug.LogFormat($"Firebase user created successfully: {result.User.Email} ({result.User.UserId})");
+        });
     }
 
     private void GetErrorMessage (AuthError errorCode) {

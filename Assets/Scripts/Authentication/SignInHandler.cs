@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
-using Firebase.Extensions;
 using System;
+using Firebase;
 
 public class SignInHandler :MonoBehaviour {
 
@@ -23,41 +23,36 @@ public class SignInHandler :MonoBehaviour {
         signUpButton.onClick.AddListener(() => SceneManager.LoadScene("SignUpScene"));
     }
 
-    public Task SignInWithEmailAsync () {
+    public void SignInWithEmailAsync () {
         var email = emailField.text;
         var password = passwordField.text;
 
         Debug.Log($"Attempting to sign in as: {email}...");
         DisableUIElements();
 
-        return auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task => {
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
             EnableUIElements();
-            if (LogTaskCompletion(task, "Sign-in")) {
-                Debug.Log($"{task.Result.User.DisplayName} signed in");
-            }
-        });
-    }
 
-    protected bool LogTaskCompletion (Task task, string operation) {
-        bool complete = false;
-        if (task.IsCanceled) {
-            Debug.Log($"{operation} canceled.");
-        } else if (task.IsFaulted) {
-            Debug.Log($"{operation} encounted an error.");
-            foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
-                string authErrorCode = "";
-                Firebase.FirebaseException firebaseEx = exception as Firebase.FirebaseException;
-                if (firebaseEx != null) {
-                    authErrorCode = $"AuthError: {((AuthError) firebaseEx.ErrorCode)}: ";
-                    GetErrorMessage((AuthError) firebaseEx.ErrorCode);
-                }
-                Debug.Log(authErrorCode + exception.ToString());
+            if (task.IsCanceled) {
+                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                return;
+
             }
-        } else if (task.IsCompleted) {
-            Debug.Log($"{operation} completed");
-            complete = true;
-        }
-        return complete;
+            if (task.IsFaulted) {
+                Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception.Message);
+                foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null) {
+                        Debug.LogError($"AuthError: {((AuthError) firebaseEx.ErrorCode)}");
+                        GetErrorMessage((AuthError) firebaseEx.ErrorCode);
+                    }
+                }
+                return;
+            }
+
+            AuthResult result = task.Result;
+            Debug.Log($"User signed in successfully: {result.User.Email} ({result.User.UserId})");
+        });
     }
 
     private void GetErrorMessage (AuthError errorCode) {
