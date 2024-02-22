@@ -6,7 +6,13 @@ public class HowToSceneHandler : MonoBehaviour {
 
     [SerializeField] private Button backButton;
     
-    void Start() {
+    private void Start() {
         backButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenuScene"));
+    }
+
+    private void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            SceneManager.LoadScene("MainMenuScene");
+        }
     }
 }

@@ -28,4 +28,10 @@ public class MainMenuSceneHandler : MonoBehaviour {
         Debug.Log($"Provider id: {user.ProviderData}");
         Debug.Log($"Photo url: {user.PhotoUrl}");
     }
+
+    private void Update () {
+        if (Input.GetKey(KeyCode.Escape)) {
+            Application.Quit();
+        }
+    }
 }

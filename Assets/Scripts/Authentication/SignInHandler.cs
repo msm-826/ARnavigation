@@ -12,6 +12,7 @@ public class SignInHandler :MonoBehaviour {
     [SerializeField] private TMP_InputField emailField;
     [SerializeField] private TMP_InputField passwordField;
     [SerializeField] private Button signInButton;
+    [SerializeField] private Button resetPasswordButton;
     [SerializeField] private Button signUpButton;
     [SerializeField] private TMP_Text alertLabel;
 
@@ -20,7 +21,14 @@ public class SignInHandler :MonoBehaviour {
     void Start () {
         auth = FirebaseAuth.DefaultInstance;
         signInButton.onClick.AddListener(() => SignInWithEmailAsync());
+        resetPasswordButton.onClick.AddListener(() => SceneManager.LoadScene("ResetPasswordScene"));
         signUpButton.onClick.AddListener(() => SceneManager.LoadScene("SignUpScene"));
+    }
+
+    private void Update () {
+        if (Input.GetKey(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     public void SignInWithEmailAsync () {
@@ -34,11 +42,12 @@ public class SignInHandler :MonoBehaviour {
             EnableUIElements();
 
             if (task.IsCanceled) {
+                alertLabel.text = "Operation was cancelled.";
                 Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
                 return;
-
             }
             if (task.IsFaulted) {
+                alertLabel.text = "Operation ended in an error.";
                 Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception.Message);
                 foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
                     FirebaseException firebaseEx = exception as FirebaseException;
@@ -51,6 +60,7 @@ public class SignInHandler :MonoBehaviour {
             }
 
             AuthResult result = task.Result;
+            alertLabel.text = "Sign in successfull.";
             Debug.Log($"User signed in successfully: {result.User.Email} ({result.User.UserId})");
         });
     }

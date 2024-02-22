@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/App Designs/SignUpScene.unity
     guid: 2dd277419d7dc634599792fdd82b7706
   - enabled: 1
+    path: Assets/Scenes/App Designs/ResetPasswordScene.unity
+    guid: d48440fabe6ace249a44c221049d4720
+  - enabled: 1
     path: Assets/Scenes/App Designs/MainMenuScene.unity
     guid: d3abc866da330bd4fb182bd6124f0d9d
   - enabled: 1

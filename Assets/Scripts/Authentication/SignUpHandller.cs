@@ -1,8 +1,6 @@
 using Firebase;
 using Firebase.Auth;
-using Firebase.Extensions;
 using System;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,10 +17,16 @@ public class SignUpHandller : MonoBehaviour {
 
     protected FirebaseAuth auth;
 
-    void Start() {
+    private void Start() {
         auth = FirebaseAuth.DefaultInstance;
         signUpButton.onClick.AddListener(() => SignUp());
         backButton.onClick.AddListener(() => SceneManager.LoadScene("SignInScene"));
+    }
+
+    private void Update () {
+        if (Input.GetKey(KeyCode.Escape)) {
+            SceneManager.LoadScene("SignInScene");
+        }
     }
 
     private void SignUp() { 
@@ -46,11 +50,13 @@ public class SignUpHandller : MonoBehaviour {
             EnableUIElements();
 
             if (task.IsCanceled) {
+                alertLabel.text = "Operation was cancelled.";
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
                 return;
             }
 
             if (task.IsFaulted) {
+                alertLabel.text = "Operation ended in an error";
                 Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
                 foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
                     FirebaseException firebaseEx = exception as FirebaseException;
@@ -63,6 +69,7 @@ public class SignUpHandller : MonoBehaviour {
             }
 
             AuthResult result = task.Result;
+            alertLabel.text = "Sign up successfull.";
             Debug.LogFormat($"Firebase user created successfully: {result.User.Email} ({result.User.UserId})");
         });
     }

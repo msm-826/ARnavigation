@@ -14,7 +14,7 @@ public class MarkerDetectorScript : MonoBehaviour {
 
     private bool isDetecting = true;
 
-    public void Start () {
+    private void Start () {
         backButton.onClick.AddListener(() => {
             SceneManager.LoadScene("MainMenuScene");
             arSession.Reset();
@@ -24,6 +24,13 @@ public class MarkerDetectorScript : MonoBehaviour {
             locationName.text = string.Empty;
             isDetecting = true;
         });
+    }
+
+    private void Update () {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            SceneManager.LoadScene("MainMenuScene");
+            arSession.Reset();
+        }
     }
 
     private void OnEnable() {

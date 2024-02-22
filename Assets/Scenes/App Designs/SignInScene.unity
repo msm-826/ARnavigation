@@ -151,6 +151,7 @@ MonoBehaviour:
   emailField: {fileID: 1314581584}
   passwordField: {fileID: 1117289285}
   signInButton: {fileID: 209753745}
+  resetPasswordButton: {fileID: 454909555}
   signUpButton: {fileID: 818233254}
   alertLabel: {fileID: 1127611023}
 --- !u!4 &75338681
