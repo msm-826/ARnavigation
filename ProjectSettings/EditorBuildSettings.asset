@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/App Designs/MarkerDetectionScene.unity
     guid: ff87b5a9e709ff34fba08f15c0415ea3
+  - enabled: 1
+    path: Assets/Scenes/App Designs/NavigationTestScene.unity
+    guid: 57f7b999f830e6048a48428caa2ded2d
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 688ce30a856b1bf4684d3a25ac3f8897, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 6c0e422b2a62f9341b4ec34d8e81a73d, type: 2}

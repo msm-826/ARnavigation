@@ -15,7 +15,8 @@ public class MainMenuSceneHandler : MonoBehaviour {
 
     void Start() {
         getStartedButton.onClick.AddListener(() => SceneManager.LoadScene("MarkerDetectionScene"));
-        howToButton.onClick.AddListener(() => SceneManager.LoadScene("HowToScene"));
+        // howToButton.onClick.AddListener(() => SceneManager.LoadScene("HowToScene"));
+        howToButton.onClick.AddListener(() => SceneManager.LoadScene("NavigationTestScene"));
         exitButton.onClick.AddListener(() => Application.Quit());
 
         auth = FirebaseAuth.DefaultInstance;
